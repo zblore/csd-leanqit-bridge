@@ -1,0 +1,30 @@
+name = "csd-leanqit-bridge"
+defaultTargets = ["CsdLeanqitBridge"]
+leanOptions = { autoImplicit = false, relaxedAutoImplicit = false }
+
+# All dependencies by pinned revision: neither csd-lean4 nor Lean-QIT is modified, and this
+# package is the certificate that their fidelity and trace distance agree. The pins must agree
+# on Lean and Mathlib; at these revisions all three resolve Mathlib to
+# 5ed2965256430c3649e86755f9576b54eca72435 (tag v4.34.0) on Lean v4.34.0. Bump them together,
+# never one alone.
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "5ed2965256430c3649e86755f9576b54eca72435"
+
+[[require]]
+name = "csd-lean4"
+git = "https://github.com/zblore/csd-lean4.git"
+rev = "13b5d16cd08150b3cc5869716060b203a36c5819"
+
+[[require]]
+name = "QIT"
+git = "https://github.com/QuAIR/Lean-QIT.git"
+rev = "15a0a5ef13e5824327e0850ea896e472366287af"
+
+[[lean_lib]]
+name = "CsdLeanqitBridge"
+
+[[lean_lib]]
+name = "CsdLeanqitBridgeTests"
+roots = ["CsdLeanqitBridge.Tests.AxiomAudit"]

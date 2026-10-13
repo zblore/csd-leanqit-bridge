@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Mathlib comes from its cache; csd-lean4 and Lean-QIT are compiled from source at their
+      # pinned revisions (neither publishes oleans a dependent workspace can restore).
+      - name: Build the bridge (warnings fatal)
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+          build-args: "--wfail CsdLeanqitBridge"
+          use-mathlib-cache: true
+
+      # The axiom pins: every export, and the Lean-QIT theorems it rests on, must report exactly
+      # [propext, Classical.choice, Quot.sound]. A drift fails the build.
+      - name: Axiom audit
+        run: lake build --wfail CsdLeanqitBridgeTests
