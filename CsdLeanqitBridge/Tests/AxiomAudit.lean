@@ -45,3 +45,23 @@ only. `lake build CsdLeanqitBridgeTests` fails if any pin drifts.
 /-- info: 'QIT.State.squaredFidelity_le_applyState_squaredFidelity' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms QIT.State.squaredFidelity_le_applyState_squaredFidelity
+
+/-- info: 'CsdLeanqitBridge.fidelity_preparation_le_one' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms CsdLeanqitBridge.fidelity_preparation_le_one
+
+/-- info: 'CsdLeanqitBridge.fuchs_van_de_graaf_preparation' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms CsdLeanqitBridge.fuchs_van_de_graaf_preparation
+
+/-- info: 'CsdLeanqitBridge.fidelity_preparation_le_apply' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms CsdLeanqitBridge.fidelity_preparation_le_apply
+
+/-- info: 'CsdLeanqitBridge.fidelity_le_flow' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms CsdLeanqitBridge.fidelity_le_flow
+
+/-- info: 'CsdLeanqitBridge.fidelity_preparation_flow' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms CsdLeanqitBridge.fidelity_preparation_flow

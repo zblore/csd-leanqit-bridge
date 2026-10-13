@@ -24,8 +24,28 @@ Fuchs–van de Graaf and the monotonicity are Lean-QIT's (`QIT.State.fidelity_le
 this package proves that `csd-lean4` and Lean-QIT mean the same thing by fidelity, trace
 distance and channels, so those results apply to `csd-lean4`.
 
+### End to end (`CsdLeanqitBridge.EndToEnd`)
+
+`csd-lean4` builds the density operator of a preparation on `Σ` (`CSD.LF2.preparationDensity`)
+and builds channels from ontic flows on `Σ` (`CSD.LF2.FlowChannel`). These theorems compose that
+chain with the identifications above, so Lean-QIT's results apply to preparations and flows
+directly.
+
+| Theorem | Statement |
+|---|---|
+| `fidelity_preparation_le_one` | `F ≤ 1` for the density operators of any two preparations on `Σ`. |
+| `fuchs_van_de_graaf_preparation` | Fuchs–van de Graaf for any two preparations on `Σ`. |
+| `fidelity_preparation_le_apply` | No `csd-lean4` channel lowers the fidelity of two preparations. |
+| `fidelity_le_flow` | Open system: if an ontic flow lifts a joint unitary and both preparations are products with a ready environment, the reduced states after the flow are at least as close in fidelity as the system preparations. The channel is the one the flow produces. |
+| `fidelity_preparation_flow` | Closed system, no lift hypothesis: on the projective sector, a flow that projects to a unitary's action leaves the fidelity of any two preparations unchanged. |
+
+The `csd-lean4` side keeps its hypotheses. The sector, the measure bridge and the
+representative are posited data, and `fidelity_le_flow` assumes the lift (`IsUnitaryLift`) and
+the product form of the preparations. `fidelity_preparation_flow` needs neither: the lift comes
+from `CSD.LF2.isUnitaryLift_unitSection`.
+
 Axioms are checked by `CsdLeanqitBridge/Tests/AxiomAudit.lean` (`lake build
-CsdLeanqitBridgeTests`): every export, and the three Lean-QIT theorems, use only `propext`,
+CsdLeanqitBridgeTests`): every export, and the three Lean-QIT theorems they rest on, use only `propext`,
 `Classical.choice` and `Quot.sound`.
 
 ## Pins
