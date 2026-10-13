@@ -14,15 +14,18 @@ and data processing, is [`csd-qit-bridge`](https://github.com/zblore/csd-qit-bri
 | `traceDist_eq` | `csd-lean4`'s trace distance `½ ∑ᵢ |λᵢ(ρ − σ)|` equals Lean-QIT's `½ ‖ρ − σ‖₁`. |
 | `fidelity_le_one_of_posSemidef` | `F(ρ, σ) ≤ 1` for all density matrices. `csd-lean4`'s own `fidelity_le_one` needs `ρ, σ` positive definite. |
 | `fuchs_van_de_graaf` | `1 − F(ρ, σ) ≤ D(ρ, σ) ≤ √(1 − F(ρ, σ)²)`, in `csd-lean4`'s `fidelity` and `traceDist`. |
+| `fidelity_le_apply` | `F(ρ, σ) ≤ F(Φ ρ, Φ σ)` for every `csd-lean4` channel `Φ` in Kraus form: fidelity cannot decrease under a channel. |
 
 The matching lemmas `sqrtMat_eq_psdSqrt` and `traceNorm_eq` identify the two libraries' square
-roots and trace norms. The bound and Fuchs–van de Graaf themselves are Lean-QIT's
-(`QIT.State.fidelity_le_one`, `QIT.State.fuchs_van_de_graaf`); this package proves that
-`csd-lean4` and Lean-QIT mean the same thing by fidelity and trace distance, so those results
-apply to `csd-lean4`.
+roots and trace norms, and `toQITChannel` turns a `csd-lean4` Kraus channel into a Lean-QIT
+channel (Lean-QIT's `ofKraus` uses the same convention, `X ↦ ∑ᵢ Kᵢ X Kᵢᴴ`). The bound,
+Fuchs–van de Graaf and the monotonicity are Lean-QIT's (`QIT.State.fidelity_le_one`,
+`QIT.State.fuchs_van_de_graaf`, `QIT.State.squaredFidelity_le_applyState_squaredFidelity`);
+this package proves that `csd-lean4` and Lean-QIT mean the same thing by fidelity, trace
+distance and channels, so those results apply to `csd-lean4`.
 
 Axioms are checked by `CsdLeanqitBridge/Tests/AxiomAudit.lean` (`lake build
-CsdLeanqitBridgeTests`): every export, and the two Lean-QIT theorems, use only `propext`,
+CsdLeanqitBridgeTests`): every export, and the three Lean-QIT theorems, use only `propext`,
 `Classical.choice` and `Quot.sound`.
 
 ## Pins
