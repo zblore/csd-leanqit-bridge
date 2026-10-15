@@ -45,8 +45,9 @@ the product form of the preparations. `fidelity_preparation_flow` needs neither:
 from `CSD.LF2.isUnitaryLift_unitSection`.
 
 Axioms are checked by `CsdLeanqitBridge/Tests/AxiomAudit.lean` (`lake build
-CsdLeanqitBridgeTests`): every export, and the three Lean-QIT theorems they rest on, use only `propext`,
-`Classical.choice` and `Quot.sound`.
+CsdLeanqitBridgeTests`): all 17 declarations of the bridge, and the three Lean-QIT theorems they
+rest on, use only `propext`, `Classical.choice` and `Quot.sound`. Each is pinned by name, and an
+inventory check walks every declaration under `CsdLeanqitBridge`, so a new one cannot escape it.
 
 ## Pins
 
